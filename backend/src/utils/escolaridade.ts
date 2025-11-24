@@ -2,9 +2,7 @@ import { Escolaridade } from '@prisma/client';
 const ordem: Escolaridade[] = [
   'FUNDAMENTAL',
   'MEDIO',
-  'TECNICO',
   'SUPERIOR',
-  'POS',
   'MESTRADO',
   'DOUTORADO',
 ];

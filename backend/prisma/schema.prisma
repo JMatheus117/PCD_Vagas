@@ -17,9 +17,7 @@ datasource db {
 enum Escolaridade {
   FUNDAMENTAL
   MEDIO
-  TECNICO
   SUPERIOR
-  POS
   MESTRADO
   DOUTORADO
 }
@@ -27,7 +25,6 @@ enum Escolaridade {
 enum Sexo {
   MASCULINO
   FEMININO
-  NAO_BINARIO
   PREFERE_NAO_INFORMAR
 }
 
@@ -64,7 +61,7 @@ model Usuario {
   escolaridade            Escolaridade
   tipo_deficiencia        TipoDeficiencia
   subtipo_deficiencia     String
-  barreiras               String             @default("nenhuma")
+  barreiras               String             
   acessibilidades_necessarias String
   buscando_emprego        Boolean            @default(true)
   cep                     String
@@ -95,27 +92,28 @@ model Empresa {
 }
 
 model Vaga {
-  id_vaga                 Int              @id @default(autoincrement())
-  empresaId               Int
-  titulo                  String
-  descricao               String           @db.VarChar(200)
-  beneficios              String
-  deficiencias_compativeis TipoDeficiencia[] // lista
-  tipo_vaga               TipoVaga
-  cidade                  String?
-  estado                  String?
-  salario                 String           // "não informado" permitido
-  acessibilidades_oferecidas String
-  data_fechamento         DateTime?
-  status                  StatusVaga       @default(ATIVO)
+  id_vaga             Int          @id @default(autoincrement())
+  titulo              String
+  descricao           String
+  beneficios          String?
+  deficiencias_compativeis String[]
+  tipo_vaga           TipoVaga
+  salario             String?
+  acessibilidades_oferecidas String?
+  data_fechamento     DateTime?
+  cidade              String?
+  estado              String?
+  status              StatusVaga   @default(ATIVO)
+  empresaId           Int
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
 
-  empresa                 Empresa          @relation(fields: [empresaId], references: [id_empresa])
-  candidatos              VagaUsuario[]
+  // novo campo
+  escolaridade_minima Escolaridade @default(FUNDAMENTAL)
 
-  createdAt               DateTime         @default(now())
-  updatedAt               DateTime         @updatedAt
+  empresa             Empresa      @relation(fields: [empresaId], references: [id_empresa])
+  candidatos          VagaUsuario[]
 }
-
 model VagaUsuario {
   id_vaga     Int
   id_usuario  Int

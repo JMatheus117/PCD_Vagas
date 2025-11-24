@@ -1,8 +1,8 @@
 -- CreateEnum
-CREATE TYPE "Escolaridade" AS ENUM ('FUNDAMENTAL', 'MEDIO', 'TECNICO', 'SUPERIOR', 'POS', 'MESTRADO', 'DOUTORADO');
+CREATE TYPE "Escolaridade" AS ENUM ('FUNDAMENTAL', 'MEDIO', 'SUPERIOR', 'MESTRADO', 'DOUTORADO');
 
 -- CreateEnum
-CREATE TYPE "Sexo" AS ENUM ('MASCULINO', 'FEMININO', 'NAO_BINARIO', 'PREFERE_NAO_INFORMAR');
+CREATE TYPE "Sexo" AS ENUM ('MASCULINO', 'FEMININO', 'PREFERE_NAO_INFORMAR');
 
 -- CreateEnum
 CREATE TYPE "TipoVaga" AS ENUM ('REMOTA', 'HIBRIDA', 'PRESENCIAL');
@@ -25,7 +25,7 @@ CREATE TABLE "Usuario" (
     "escolaridade" "Escolaridade" NOT NULL,
     "tipo_deficiencia" "TipoDeficiencia" NOT NULL,
     "subtipo_deficiencia" TEXT NOT NULL,
-    "barreiras" TEXT NOT NULL DEFAULT 'nenhuma',
+    "barreiras" TEXT NOT NULL,
     "acessibilidades_necessarias" TEXT NOT NULL,
     "buscando_emprego" BOOLEAN NOT NULL DEFAULT true,
     "cep" TEXT NOT NULL,
@@ -59,20 +59,21 @@ CREATE TABLE "Empresa" (
 -- CreateTable
 CREATE TABLE "Vaga" (
     "id_vaga" SERIAL NOT NULL,
-    "empresaId" INTEGER NOT NULL,
     "titulo" TEXT NOT NULL,
-    "descricao" VARCHAR(200) NOT NULL,
-    "beneficios" TEXT NOT NULL,
-    "deficiencias_compativeis" "TipoDeficiencia"[],
+    "descricao" TEXT NOT NULL,
+    "beneficios" TEXT,
+    "deficiencias_compativeis" TEXT[],
     "tipo_vaga" "TipoVaga" NOT NULL,
+    "salario" TEXT,
+    "acessibilidades_oferecidas" TEXT,
+    "data_fechamento" TIMESTAMP(3),
     "cidade" TEXT,
     "estado" TEXT,
-    "salario" TEXT NOT NULL,
-    "acessibilidades_oferecidas" TEXT NOT NULL,
-    "data_fechamento" TIMESTAMP(3),
     "status" "StatusVaga" NOT NULL DEFAULT 'ATIVO',
+    "empresaId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "escolaridade_minima" "Escolaridade" NOT NULL DEFAULT 'FUNDAMENTAL',
 
     CONSTRAINT "Vaga_pkey" PRIMARY KEY ("id_vaga")
 );

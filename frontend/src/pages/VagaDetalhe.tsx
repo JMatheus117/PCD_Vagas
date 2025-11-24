@@ -32,9 +32,11 @@ export default function VagaDetalhe() {
           <p><strong>Benefícios:</strong> {vaga.beneficios}</p>
           <p><strong>Deficiências compatíveis:</strong> {vaga.deficiencias_compativeis.join(', ')}</p>
           <p><strong>Tipo:</strong> {vaga.tipo_vaga}</p>
+          <p><strong>Escolaridade mínima:</strong> {vaga.escolaridade_minima}</p>
           <p><strong>Local:</strong> {vaga.cidade || '—'}/{vaga.estado || '—'}</p>
           <p><strong>Salário:</strong> {vaga.salario}</p>
           <p><strong>Acessibilidades oferecidas:</strong> {vaga.acessibilidades_oferecidas}</p>
+
           <Button onClick={candidatar} aria-label="Me candidatar">Me candidatar</Button>
         </div>
       )}

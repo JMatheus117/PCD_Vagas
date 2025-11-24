@@ -1,11 +1,9 @@
 export const escolaridadeOptions = [
-  { value: 'FUNDAMENTAL', label: 'Fundamental' },
-  { value: 'MEDIO', label: 'Médio' },
-  { value: 'TECNICO', label: 'Técnico' },
-  { value: 'SUPERIOR', label: 'Superior' },
-  { value: 'POS', label: 'Pós' },
-  { value: 'MESTRADO', label: 'Mestrado' },
-  { value: 'DOUTORADO', label: 'Doutorado' },
+  { label: 'Fundamental', value: 'FUNDAMENTAL' },
+  { label: 'Médio', value: 'MEDIO' },
+  { label: 'Superior', value: 'SUPERIOR' },
+  { label: 'Mestrado', value: 'MESTRADO' },
+  { label: 'Doutorado', value: 'DOUTORADO' },
 ];
 
 export const sexoOptions = [
